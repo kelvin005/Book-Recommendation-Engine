@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📚 Book Recommender</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #f9fafb;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-10">
+  <div class="max-w-3xl w-full bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">📚 Smart Book Recommender</h1>
+
+    <form id="genreForm" class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      <input type="text" id="genre" placeholder="e.g., romance, sci-fi, history" 
+             class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+      <button type="submit" 
+              class="bg-blue-600 hover:bg-blue-700 transition-all text-white px-6 py-2 rounded-lg shadow">
+        Get Recommendations
+      </button>
+    </form>
+
+    <div id="results" class="space-y-6">
+      <!-- Book cards will appear here -->
+    </div>
+  </div>
+
+  <!-- Link to external JS -->
+  <script src="script.js"></script>
+</body>
+</html>
