@@ -19,15 +19,15 @@ module "dynamodb" {
 
 
 module "lambda" {
-  source   = "./modules/lambda"
-  dynamodb_table_name  = module.dynamodb.dynamodb_table_name
-  lambda_exec_role     = module.iam_role.lambda_role_arn
+  source              = "./modules/lambda"
+  dynamodb_table_name = module.dynamodb.dynamodb_table_name
+  lambda_exec_role    = module.iam_role.lambda_role_arn
 }
 module "api_gateway" {
   source = "./modules/api_gateway"
 
-  lambda_name = module.lambda.lambda_name
-  lambda_arn  = module.lambda.lambda_invoke_arn
+  lambda_name   = module.lambda.lambda_name
+  lambda_arn    = module.lambda.lambda_invoke_arn
   log_group_arn = module.cloudwatch.cloudwatch_log_group_arn
 
   depends_on = [
@@ -36,7 +36,7 @@ module "api_gateway" {
 }
 
 module "s3_frontend" {
-  source = "./modules/s3_frontend"
+  source      = "./modules/s3_frontend"
   bucket_name = "book-recommendation-frontendv2"
   local_dir   = "${path.module}/../frontend"
 }
@@ -47,8 +47,19 @@ module "iam_role" {
   source = "./modules/iam_role"
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "recommendation-engine-backend-tfstate-bucket"
+    key            = "terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "recommendation_engine_backend_tfstate_table"
+    encrypt        = true
+  }
+}
 
 output "api_endpoint_root_url" {
   value = module.api_gateway.api_endpoint
 }
+
+
 
