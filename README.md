@@ -5,6 +5,9 @@ A **serverless web application** that recommends books based on user-provided ge
 ---
 
 ## 🚀 Live Demo
+![ Live Image](./asset/smartbookscreenshot.png)
+
+
 
 > **Frontend:** Deployed via AWS S3 + CloudFront  
 > **API Endpoint:** AWS API Gateway + Lambda (Python)
